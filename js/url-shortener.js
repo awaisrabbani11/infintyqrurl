@@ -262,7 +262,6 @@ class URLShortener {
             }
         }
     }
-    }
 
     /**
      * Primary Rebrandly API shortening (professional service with API key)
