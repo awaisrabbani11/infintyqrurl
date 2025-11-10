@@ -309,25 +309,25 @@ class URLShortener {
     }
 
     /**
-     * Shorten URL using Shrtcode API (free, no auth required)
+     * Shorten URL using Ouo.im API (free, no auth required)
      * @param {string} longUrl - URL to shorten
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
      */
     async shortenWithShrtcode(longUrl, customAlias = '') {
         try {
-            // Use shrtcode API - free service with generous limits
-            const url = new URL('https://api.shrtcode.com/v2/shorten');
-
+            // Use Ouo.im API - free service that works reliably
             const params = new URLSearchParams({
+                action: 'shorturl',
+                format: 'json',
                 url: longUrl
             });
 
             if (customAlias) {
-                params.append('code', customAlias);
+                params.append('keyword', customAlias);
             }
 
-            const response = await fetch(`${url}?${params.toString()}`, {
+            const response = await fetch(`https://uo.im/api/1.1/uo?${params.toString()}`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json'
@@ -335,30 +335,30 @@ class URLShortener {
             });
 
             if (!response.ok) {
-                throw new Error(`Shrtcode API error: ${response.status}`);
+                throw new Error(`Ouo.im API error: ${response.status}`);
             }
 
             const data = await response.json();
 
-            if (data.ok && data.result) {
+            if (data && data.shortenedURL) {
                 return {
                     success: true,
                     data: {
                         id: AppUtils.dateUtils.generateId(),
                         longUrl: longUrl,
-                        shortUrl: data.result.short_url,
-                        shortCode: data.result.code || data.result.short_url.split('/').pop(),
+                        shortUrl: data.shortenedURL,
+                        shortCode: data.shortenedURL.split('/').pop(),
                         customAlias: customAlias,
                         createdAt: AppUtils.dateUtils.now(),
                         clicks: 0
                     }
                 };
             } else {
-                throw new Error(data.error || 'Failed to shorten URL');
+                throw new Error('Failed to shorten URL');
             }
 
         } catch (error) {
-            console.error('Shrtcode API failed:', error);
+            console.error('Ouo.im API failed:', error);
             throw error;
         }
     }
