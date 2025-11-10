@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfinityQR URL - Free URL Shortener & QR Code Generator</title>
+    <meta name="description" content="Shorten URLs instantly and generate custom QR codes with InfinityQR URL. Perfect for influencers, businesses, and developers. Fast, reliable, and free.">
+    <meta name="keywords" content="URL shortener, QR code generator, link shortener, free QR codes, custom URLs, link management">
+    <meta name="author" content="InfinityQR URL">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://infinityqrurl.com/">
+    <meta property="og:title" content="InfinityQR URL - Free URL Shortener & QR Code Generator">
+    <meta property="og:description" content="Shorten URLs instantly and generate custom QR codes. Perfect for influencers, businesses, and developers.">
+    <meta property="og:image" content="https://infinityqrurl.com/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://infinityqrurl.com/">
+    <meta property="twitter:title" content="InfinityQR URL - Free URL Shortener & QR Code Generator">
+    <meta property="twitter:description" content="Shorten URLs instantly and generate custom QR codes. Perfect for influencers, businesses, and developers.">
+    <meta property="twitter:image" content="https://infinityqrurl.com/assets/images/og-image.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://infinityqrurl.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∞</text></svg>">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "InfinityQR URL",
+        "description": "Free URL shortener and QR code generator with custom branding options",
+        "url": "https://infinityqrurl.com/",
+        "applicationCategory": "Productivity",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "InfinityQR URL"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>∞ InfinityQR URL</h1>
+                </div>
+
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="loginBtn" class="btn btn-secondary">Login</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+                    </li>
+                </ul>
+
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Shorten URLs & Generate QR Codes Instantly</h1>
+                    <p class="hero-subtitle">Professional URL shortening and QR code generation for influencers, businesses, and developers. Custom URLs, analytics, and more.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Placement #1 - Header Banner -->
+        <div class="ad-container ad-header">
+            <!-- add ads here - Header Banner 728x90 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90</p>
+            </div>
+        </div>
+
+        <!-- URL Shortener Section -->
+        <section id="url-shortener" class="url-shortener-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>URL Shortener</h2>
+                    <p>Transform long URLs into short, memorable links</p>
+                </div>
+
+                <div class="url-shortener-form">
+                    <div class="input-group">
+                        <input
+                            type="url"
+                            id="longUrl"
+                            placeholder="Enter your long URL here (e.g., https://example.com/very/long/url)"
+                            class="url-input"
+                            required
+                        >
+                        <input
+                            type="text"
+                            id="customAlias"
+                            placeholder="Custom alias (optional, e.g., mybrand)"
+                            class="alias-input"
+                        >
+                        <button id="shortenBtn" class="btn btn-primary btn-large">
+                            <span class="btn-text">Shorten URL</span>
+                            <span class="btn-loader">Loading...</span>
+                        </button>
+                    </div>
+
+                    <div id="urlResult" class="result-container" style="display: none;">
+                        <div class="result-content">
+                            <div class="short-url-display">
+                                <input type="text" id="shortUrl" readonly>
+                                <button id="copyUrlBtn" class="btn btn-secondary">Copy</button>
+                            </div>
+                            <div class="url-stats">
+                                <span class="stat-item">Created: <span id="createdDate"></span></span>
+                                <span class="stat-item">Clicks: <span id="clickCount">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- URL History -->
+                <div class="url-history">
+                    <h3>Recent URLs</h3>
+                    <div id="urlHistoryList" class="history-list">
+                        <p class="no-history">No URLs shortened yet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Placement #2 - Content Banner -->
+        <div class="ad-container ad-content-1">
+            <!-- add ads here - Content Banner 728x90 #1 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90</p>
+            </div>
+        </div>
+
+        <!-- QR Code Generator Section -->
+        <section id="qr-generator" class="qr-generator-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>QR Code Generator</h2>
+                    <p>Create custom QR codes for any URL</p>
+                </div>
+
+                <div class="qr-generator-form">
+                    <div class="input-group">
+                        <input
+                            type="url"
+                            id="qrUrl"
+                            placeholder="Enter URL for QR code (or use shortened URL above)"
+                            class="url-input"
+                            required
+                        >
+                        <div class="qr-options">
+                            <select id="qrSize" class="size-select">
+                                <option value="200">Small (200x200)</option>
+                                <option value="300" selected>Medium (300x300)</option>
+                                <option value="500">Large (500x500)</option>
+                            </select>
+                            <select id="qrFormat" class="format-select">
+                                <option value="png">PNG</option>
+                                <option value="svg">SVG</option>
+                                <option value="jpg">JPG</option>
+                            </select>
+                        </div>
+                        <button id="generateQrBtn" class="btn btn-primary btn-large">
+                            <span class="btn-text">Generate QR Code</span>
+                            <span class="btn-loader">Loading...</span>
+                        </button>
+                    </div>
+
+                    <div id="qrResult" class="result-container" style="display: none;">
+                        <div class="result-content">
+                            <div class="qr-display">
+                                <img id="qrImage" src="" alt="Generated QR Code">
+                                <div class="qr-actions">
+                                    <button id="downloadQrBtn" class="btn btn-secondary">Download QR</button>
+                                    <button id="copyQrBtn" class="btn btn-secondary">Copy Image</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR History -->
+                <div class="qr-history">
+                    <h3>Recent QR Codes</h3>
+                    <div id="qrHistoryList" class="history-list">
+                        <p class="no-history">No QR codes generated yet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Placement #3 - Content Banner -->
+        <div class="ad-container ad-content-2">
+            <!-- add ads here - Content Banner 728x90 #2 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90</p>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About InfinityQR URL</h2>
+                    <p>Professional link management for modern businesses</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Instant URL shortening and QR code generation with industry-leading speed</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Custom URLs</h3>
+                        <p>Create branded short URLs perfect for influencers and businesses</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Analytics</h3>
+                        <p>Track clicks, views, and engagement with detailed analytics (coming soon)</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure & Reliable</h3>
+                        <p>Enterprise-grade security with 99.9% uptime guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Placement #4 - Sidebar Banner #1 (Desktop only) -->
+        <div class="ad-container ad-sidebar-1">
+            <!-- add ads here - Sidebar Banner 728x90 #1 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90 (Sidebar)</p>
+            </div>
+        </div>
+
+        <!-- Ad Placement #5 - Sidebar Banner #2 (Desktop only) -->
+        <div class="ad-container ad-sidebar-2">
+            <!-- add ads here - Sidebar Banner 728x90 #2 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90 (Sidebar)</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Ad Placement #6 - Footer Banner #1 -->
+        <div class="ad-container ad-footer-1">
+            <!-- add ads here - Footer Banner 728x90 #1 -->
+            <div class="ad-placeholder">
+                <p>Ad Banner 728x90</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>InfinityQR URL</h3>
+                    <p>Professional URL shortening and QR code generation for modern businesses.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#url-shortener">URL Shortener</a></li>
+                        <li><a href="#qr-generator">QR Generator</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="GitHub">⚡</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Placement #7 - Footer Banner #2 -->
+            <div class="ad-container ad-footer-2">
+                <!-- add ads here - Footer Banner 728x90 #2 -->
+                <div class="ad-placeholder">
+                    <p>Ad Banner 728x90</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 InfinityQR URL. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" id="showSignup">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="showLogin">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/url-shortener.js"></script>
+    <script src="js/qr-generator.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
