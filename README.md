@@ -166,23 +166,23 @@ All placements are marked with `<!-- add ads here -->` comments for easy integra
 
 ## 🚀 Deployment
 
-### Option 1: InfinityFree (Primary)
-1. Sign up at InfinityFree hosting
-2. Upload all files to `public_html` directory
+### Option 1: GitHub Pages (Primary)
+1. Create GitHub repository and push code
+2. Enable GitHub Pages in repository settings
 3. Set custom domain to `infinityqrurl.com`
-4. Configure SSL certificate
+4. Configure DNS records (A records for GitHub Pages)
+5. GitHub automatically provides SSL certificate
 
-### Option 2: Netlify (Backup)
+### Option 2: Netlify (Alternative)
 1. Connect GitHub repository to Netlify
 2. Configure build settings (none needed for static site)
-3. Set up custom domain
+3. Set up custom domain with Netlify DNS
 4. Configure environment variables for API keys
-5. Enable automatic HTTPS
+5. Netlify automatically provides HTTPS
 
 ### API Key Configuration
-For production, configure API keys in your hosting environment:
-- **Netlify**: Site settings → Build & deploy → Environment
-- **InfinityFree**: Use server-side configuration or secure headers
+- **GitHub Pages**: API keys in `config.js` (consider serverless functions for production)
+- **Netlify**: Use environment variables in Netlify dashboard for security
 
 ## 🔐 Security Features
 
