@@ -229,8 +229,8 @@ class URLShortener {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
         try {
-            // Try using Cutt.ly API first (free tier)
-            const result = await this.shortenWithCuttly(longUrl, customAlias);
+            // Try using Shrtcode API first (free, no auth required)
+            const result = await this.shortenWithShrtcode(longUrl, customAlias);
 
             clearTimeout(timeoutId);
             return result;
@@ -238,7 +238,7 @@ class URLShortener {
         } catch (error) {
             clearTimeout(timeoutId);
 
-            // If Cutt.ly fails, try TinyURL as fallback
+            // If Shrtcode fails, try TinyURL as fallback
             try {
                 console.log('Fallback to TinyURL API');
                 const fallbackResult = await this.shortenWithTinyURLFallback(longUrl, customAlias);
@@ -248,7 +248,7 @@ class URLShortener {
 
                 // Last resort: client-side generation
                 try {
-                    const clientSideResult = await this.shortenWithShrtcode(longUrl, customAlias);
+                    const clientSideResult = await this.shortenWithClientSide(longUrl, customAlias);
                     return clientSideResult;
                 } catch (clientError) {
                     throw new Error('URL shortening service is currently unavailable');
