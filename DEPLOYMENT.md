@@ -121,24 +121,79 @@ infintyqrurl/
 2. Monitor deployment in dashboard
 3. Test live site
 
+## 🌐 Custom Domain Setup (Manual DNS Configuration)
+
+Since you're connecting your domain manually, follow these steps:
+
+### Step 1: Choose Your Hosting Platform
+- **GitHub Pages**: Will be your primary hosting
+- **Netlify**: Alternative/backup hosting
+
+### Step 2: Configure DNS for infinityqrurl.com
+
+**For GitHub Pages:**
+1. Go to your domain registrar (where you bought infinityqrurl.com)
+2. Add these DNS records:
+   ```
+   Type: A
+   Name: @
+   Value: 185.199.108.153
+   TTL: 3600
+
+   Type: A
+   Name: @
+   Value: 185.199.109.153
+   TTL: 3600
+
+   Type: A
+   Name: @
+   Value: 185.199.110.153
+   TTL: 3600
+
+   Type: A
+   Name: @
+   Value: 185.199.111.153
+   TTL: 3600
+
+   Type: CNAME
+   Name: www
+   Value: yourusername.github.io
+   TTL: 3600
+   ```
+
+**For Netlify (if using as alternative):**
+1. After connecting your repo to Netlify, go to Domain settings
+2. Add infinityqrurl.com
+3. Netlify will provide you with specific DNS records to add
+
+### Step 3: Configure GitHub Pages Custom Domain
+1. In your GitHub repository, go to **Settings** → **Pages**
+2. Under "Custom domain", enter: `infinityqrurl.com`
+3. Check "Enforce HTTPS"
+4. GitHub will automatically provision SSL certificate
+
+### Step 4: Wait for DNS Propagation
+- DNS changes can take 24-48 hours to propagate
+- You can check status at [whatsmydns.net](https://whatsmydns.net/)
+
 ## 🔧 API Key Configuration
 
 ### For Production Deployment
 
-**Netlify (Recommended):**
+**Netlify (if using):**
 - Use environment variables in Netlify dashboard
 - API keys are secure and not exposed in frontend
 
-**InfinityFree:**
+**GitHub Pages:**
 - API keys are currently in `config.js` (frontend)
 - For production, consider:
-  - Server-side proxy for API calls
-  - Environment variables via server configuration
+  - Using a backend service for API calls
+  - Serverless functions (GitHub Actions + API)
   - Rate limiting and security headers
 
-### API Integration Notes
+### Current API Integration
 
-The current implementation uses:
+The implementation uses:
 - **QR Code Generation**: qrserver.com API (free, no auth required)
 - **URL Shortening**: Mock implementation (replace with actual service)
 
