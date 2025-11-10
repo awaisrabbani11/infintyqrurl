@@ -1,0 +1,33 @@
+{
+  "name": "infinityqr-url",
+  "version": "1.0.0",
+  "description": "Free URL Shortener & QR Code Generator",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "serve": "python3 -m http.server 8080",
+    "build": "echo 'Build complete - static files ready'",
+    "deploy:github": "git push origin main",
+    "deploy:netlify": "netlify deploy --prod --dir=."
+  },
+  "keywords": [
+    "url-shortener",
+    "qr-code-generator",
+    "infinityqr",
+    "link-shortener",
+    "free-qr-codes",
+    "custom-urls"
+  ],
+  "author": "InfinityQR URL",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awaisrabbani11/infintyqrurl.git"
+  },
+  "homepage": "https://awaisrabbani11.github.io/infintyqrurl/",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
