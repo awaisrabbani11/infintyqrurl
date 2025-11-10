@@ -369,7 +369,7 @@ class URLShortener {
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - Generated response
      */
-    async shortenWithShrtcode(longUrl, customAlias = '') {
+    async shortenWithClientSide(longUrl, customAlias = '') {
         // Generate client-side shortened URL
         const shortCode = customAlias || this.generateShortCode();
         const shortUrl = `https://${AppConfig.config.app.domain}/${shortCode}`;
