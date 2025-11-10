@@ -249,17 +249,19 @@ class URLShortener {
                     const lastResortResult = await this.shortenWithShrtcode(longUrl, customAlias);
                     return lastResortResult;
                 } catch (fallbackError) {
-                console.error('All URL shortening services failed:', fallbackError);
+                    console.error('All URL shortening services failed:', fallbackError);
 
-                // Last resort: client-side generation
-                try {
-                    const clientSideResult = await this.shortenWithClientSide(longUrl, customAlias);
-                    return clientSideResult;
-                } catch (clientError) {
-                    throw new Error('URL shortening service is currently unavailable');
+                    // Last resort: client-side generation
+                    try {
+                        const clientSideResult = await this.shortenWithClientSide(longUrl, customAlias);
+                        return clientSideResult;
+                    } catch (clientError) {
+                        throw new Error('URL shortening service is currently unavailable');
+                    }
                 }
             }
         }
+    }
     }
 
     /**
