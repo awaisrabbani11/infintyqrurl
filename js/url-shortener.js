@@ -263,7 +263,7 @@ class URLShortener {
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
      */
-    async shortenWithTinyURL(longUrl, customAlias = '') {
+    async shortenWithTinyURL(longUrl, customAlias = '', controller = null) {
         try {
             // TinyURL API (free, no auth required) - using GET method for simplicity
             const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`, {
