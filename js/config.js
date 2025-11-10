@@ -6,7 +6,7 @@ const config = {
     // URL Shortener API
     urlShortener: {
         apiKey: window.ENV?.URL_SHORTENER_API_KEY || 'a74ebde57f5143ad8a2db22b04d8ef64',
-        baseUrl: 'https://api.short.io', // Using short.io as example (replace with actual service)
+        baseUrl: 'https://api.rebrandly.com/v1', // Using Rebrandly API
         timeout: 10000
     },
 
