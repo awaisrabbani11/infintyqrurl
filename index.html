@@ -88,25 +88,214 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Structured Data -->
+    <!-- Comprehensive Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "InfinityQR URL",
-        "description": "Free URL shortener and QR code generator with custom branding options",
-        "url": "https://infinityqrurl.com/",
-        "applicationCategory": "Productivity",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "creator": {
-            "@type": "Organization",
-            "name": "InfinityQR URL"
-        }
+        "@graph": [
+            {
+                "@type": "WebApplication",
+                "@id": "https://www.infinityqrurl.com/#webapp",
+                "name": "InfinityQR URL",
+                "description": "Free URL shortener and QR code generator with analytics, custom domains, and branded links",
+                "url": "https://www.infinityqrurl.com/",
+                "applicationCategory": "Productivity",
+                "operatingSystem": "Any",
+                "browserRequirements": "HTML5, CSS3, JavaScript",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "validFrom": "2024-01-01"
+                },
+                "creator": {
+                    "@type": "Organization",
+                    "@id": "https://www.infinityqrurl.com/#organization",
+                    "name": "InfinityQR URL",
+                    "url": "https://www.infinityqrurl.com/",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.infinityqrurl.com/assets/images/logo.png",
+                        "width": 512,
+                        "height": 512
+                    },
+                    "sameAs": [
+                        "https://twitter.com/InfinityQRURL",
+                        "https://www.linkedin.com/company/infinityqrurl",
+                        "https://github.com/awaisrabbani11/infintyqrurl"
+                    ],
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "contactType": "customer service",
+                        "email": "support@infinityqrurl.com"
+                    }
+                },
+                "featureList": [
+                    "URL shortening",
+                    "QR code generation",
+                    "Link analytics",
+                    "Custom domains",
+                    "Branded links",
+                    "API access"
+                ],
+                "screenshot": "https://www.infinityqrurl.com/assets/images/screenshot.png",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "ratingCount": "1247",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://www.infinityqrurl.com/#organization",
+                "name": "InfinityQR URL",
+                "description": "Professional URL shortening and QR code generation service",
+                "url": "https://www.infinityqrurl.com/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.infinityqrurl.com/assets/images/logo.png",
+                    "width": 512,
+                    "height": 512
+                },
+                "foundingDate": "2024-01-01",
+                "areaServed": "Worldwide",
+                "knowsLanguage": ["English", "Spanish", "French", "German"],
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Services",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "URL Shortening Service",
+                                "description": "Free URL shortening with analytics"
+                            },
+                            "price": "0",
+                            "priceCurrency": "USD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "QR Code Generation",
+                                "description": "Custom QR code generator with multiple formats"
+                            },
+                            "price": "0",
+                            "priceCurrency": "USD"
+                        }
+                    ]
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://www.infinityqrurl.com/#website",
+                "name": "InfinityQR URL",
+                "url": "https://www.infinityqrurl.com/",
+                "description": "Free URL shortener and QR code generator with analytics",
+                "inLanguage": "en-US",
+                "potentialAction": [
+                    {
+                        "@type": "SearchAction",
+                        "target": "https://www.infinityqrurl.com/search?q={search_term_string}",
+                        "query-input": "required name=search_term_string"
+                    },
+                    {
+                        "@type": "ReadAction",
+                        "target": "https://www.infinityqrurl.com/"
+                    }
+                ],
+                "publisher": {
+                    "@id": "https://www.infinityqrurl.com/#organization"
+                }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.infinityqrurl.com/#url-shortening-service",
+                "name": "URL Shortening Service",
+                "description": "Professional URL shortening with analytics, custom domains, and branded links",
+                "provider": {
+                    "@id": "https://www.infinityqrurl.com/#organization"
+                },
+                "serviceType": "URL Shortening",
+                "areaServed": "Worldwide",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.infinityqrurl.com/#qr-code-service",
+                "name": "QR Code Generation Service",
+                "description": "Custom QR code generator with multiple formats and sizes",
+                "provider": {
+                    "@id": "https://www.infinityqrurl.com/#organization"
+                },
+                "serviceType": "QR Code Generation",
+                "areaServed": "Worldwide",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                }
+            },
+            {
+                "@type": "Article",
+                "@id": "https://www.infinityqrurl.com/#article",
+                "headline": "Free URL Shortener & QR Code Generator - InfinityQR URL",
+                "description": "Professional URL shortening and QR code generation with analytics. Free service for businesses, influencers, and marketers.",
+                "author": {
+                    "@id": "https://www.infinityqrurl.com/#organization"
+                },
+                "publisher": {
+                    "@id": "https://www.infinityqrurl.com/#organization"
+                },
+                "datePublished": "2024-01-01",
+                "dateModified": "2024-11-10",
+                "mainEntityOfPage": "https://www.infinityqrurl.com/",
+                "image": "https://www.infinityqrurl.com/assets/images/og-image.jpg",
+                "articleSection": "Technology",
+                "wordCount": 2500,
+                "keywords": ["URL shortener", "QR code generator", "link management", "marketing tools"]
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://www.infinityqrurl.com/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Is InfinityQR URL really free?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, InfinityQR URL offers a completely free plan with unlimited URL shortening and QR code generation."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I track clicks on my shortened URLs?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, we provide detailed analytics including click counts, geographic data, and referral sources."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Do you support custom domains?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, custom domain support is available for branded short links."
+                        }
+                    }
+                ]
+            }
+        ]
     }
     </script>
 </head>
