@@ -229,8 +229,8 @@ class URLShortener {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
         try {
-            // Try using Shrtcode API first (free, no auth required)
-            const result = await this.shortenWithShrtcode(longUrl, customAlias);
+            // Try using TinyURL API first (most reliable, free, no auth required)
+            const result = await this.shortenWithTinyURL(longUrl, customAlias);
 
             clearTimeout(timeoutId);
             return result;
@@ -238,10 +238,10 @@ class URLShortener {
         } catch (error) {
             clearTimeout(timeoutId);
 
-            // If Shrtcode fails, try TinyURL as fallback
+            // If TinyURL fails, try Ouo.im as fallback
             try {
-                console.log('Fallback to TinyURL API');
-                const fallbackResult = await this.shortenWithTinyURLFallback(longUrl, customAlias);
+                console.log('Fallback to Ouo.im API');
+                const fallbackResult = await this.shortenWithShrtcode(longUrl, customAlias);
                 return fallbackResult;
             } catch (fallbackError) {
                 console.error('All URL shortening services failed:', fallbackError);
