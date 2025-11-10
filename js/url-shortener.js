@@ -230,7 +230,7 @@ class URLShortener {
 
         try {
             // Try using TinyURL API first (most reliable, free, no auth required)
-            const result = await this.shortenWithTinyURL(longUrl, customAlias);
+            const result = await this.shortenWithTinyURL(longUrl, customAlias, controller);
 
             clearTimeout(timeoutId);
             return result;
