@@ -441,6 +441,66 @@ section {
 .ad-sidebar-1,
 .ad-sidebar-2 {
     display: none; /* Hidden by default, shown on desktop */
+    position: fixed;
+    right: 0;
+    top: 200px;
+    width: 300px;
+    z-index: 999;
+    transform: translateX(250px);
+    transition: transform 0.3s ease;
+    border-left: 3px solid var(--accent-primary);
+}
+
+.ad-sidebar-2 {
+    top: 320px;
+}
+
+.ad-sidebar-1:hover,
+.ad-sidebar-2:hover {
+    transform: translateX(0);
+}
+
+.ad-sidebar-1 .ad-placeholder,
+.ad-sidebar-2 .ad-placeholder {
+    background: var(--card-bg);
+    border: 2px solid var(--accent-primary);
+    border-radius: 8px 0 0 8px;
+    padding: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+    position: relative;
+}
+
+.ad-sidebar-toggle {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60px;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    color: var(--primary-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.ad-sidebar-toggle:hover {
+    background: var(--accent-secondary);
+    width: 45px;
+}
+
+.ad-sidebar-closed {
+    transform: translateX(280px);
+}
+
+.ad-sidebar-closed .ad-sidebar-toggle {
+    left: -45px;
 }
 
 /* Footer */
