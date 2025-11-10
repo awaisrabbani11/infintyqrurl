@@ -238,12 +238,17 @@ class URLShortener {
         } catch (error) {
             clearTimeout(timeoutId);
 
-            // If TinyURL fails, try Ouo.im as fallback
+            // If Rebrandly fails, try TinyURL as fallback
             try {
-                console.log('Fallback to Ouo.im API');
-                const fallbackResult = await this.shortenWithShrtcode(longUrl, customAlias);
+                console.log('Fallback to TinyURL API');
+                const fallbackResult = await this.shortenWithTinyURL(longUrl, customAlias, controller);
                 return fallbackResult;
-            } catch (fallbackError) {
+            } catch (tinyurlError) {
+                console.log('TinyURL failed, trying Ouo.im API');
+                try {
+                    const lastResortResult = await this.shortenWithShrtcode(longUrl, customAlias);
+                    return lastResortResult;
+                } catch (fallbackError) {
                 console.error('All URL shortening services failed:', fallbackError);
 
                 // Last resort: client-side generation
