@@ -54,8 +54,12 @@ const config = {
 // Environment Detection
 const environment = {
     isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
-    isProduction: window.location.hostname.includes('infinityqrurl.com'),
-    isStaging: window.location.hostname.includes('staging') || window.location.hostname.includes('dev')
+    isProduction: window.location.hostname.includes('infinityqrurl.com') ||
+                  window.location.hostname.includes('github.io') ||
+                  window.location.hostname.includes('netlify.app'),
+    isStaging: window.location.hostname.includes('staging') || window.location.hostname.includes('dev'),
+    isGitHubPages: window.location.hostname.includes('github.io'),
+    isNetlify: window.location.hostname.includes('netlify.app')
 };
 
 // API Configuration based on environment
