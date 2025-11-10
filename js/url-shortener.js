@@ -309,40 +309,45 @@ class URLShortener {
     }
 
     /**
-     * Shorten URL using Cutt.ly API (free tier)
+     * Shorten URL using Shrtcode API (free, no auth required)
      * @param {string} longUrl - URL to shorten
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
      */
-    async shortenWithCuttly(longUrl, customAlias = '') {
+    async shortenWithShrtcode(longUrl, customAlias = '') {
         try {
-            // Use free API service - cutt.ly has a free API
-            const response = await fetch('https://cutt.ly/api/api.php', {
-                method: 'POST',
+            // Use shrtcode API - free service with generous limits
+            const url = new URL('https://api.shrtcode.com/v2/shorten');
+
+            const params = new URLSearchParams({
+                url: longUrl
+            });
+
+            if (customAlias) {
+                params.append('code', customAlias);
+            }
+
+            const response = await fetch(`${url}?${params.toString()}`, {
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    key: 'b1e4c2c9395e4e4f9a3f9b4c1c9e4e4f', // Free public API key
-                    short: customAlias || '',
-                    url: longUrl
-                })
+                    'Accept': 'application/json'
+                }
             });
 
             if (!response.ok) {
-                throw new Error(`Cutt.ly API error: ${response.status}`);
+                throw new Error(`Shrtcode API error: ${response.status}`);
             }
 
             const data = await response.json();
 
-            if (data.status === 'success' && data.url) {
+            if (data.ok && data.result) {
                 return {
                     success: true,
                     data: {
                         id: AppUtils.dateUtils.generateId(),
                         longUrl: longUrl,
-                        shortUrl: data.url.shortLink,
-                        shortCode: data.url.shortLink.split('/').pop(),
+                        shortUrl: data.result.short_url,
+                        shortCode: data.result.code || data.result.short_url.split('/').pop(),
                         customAlias: customAlias,
                         createdAt: AppUtils.dateUtils.now(),
                         clicks: 0
@@ -353,7 +358,7 @@ class URLShortener {
             }
 
         } catch (error) {
-            console.error('Cutt.ly API failed:', error);
+            console.error('Shrtcode API failed:', error);
             throw error;
         }
     }
