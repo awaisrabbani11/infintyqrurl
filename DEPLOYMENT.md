@@ -38,55 +38,52 @@ infintyqrurl/
 └── DEPLOYMENT.md           # ✅ This file
 ```
 
-## 🌐 Option 1: InfinityFree Deployment (Primary)
+## 🌐 Option 1: GitHub Pages Deployment (Primary)
 
-### Step 1: Sign Up and Create Account
-1. Visit [InfinityFree](https://infinityfree.net/)
-2. Sign up for a free account
-3. Verify your email address
+### Step 1: Create GitHub Repository
+1. Go to [GitHub](https://github.com/) and sign in
+2. Click "New repository"
+3. Repository name: `infintyqrurl` (or your preferred name)
+4. Make it **Public** (required for GitHub Pages)
+5. DO NOT initialize with README (since you already have files)
+6. Click "Create repository"
 
-### Step 2: Create New Website
-1. Log into your InfinityFree control panel
-2. Click "Create New Website"
-3. Choose a subdomain (temporary) or use your custom domain
-4. Select "Upload Files" option
+### Step 2: Push Your Code to GitHub
+1. Open terminal in your project directory
+2. If you haven't initialized git yet:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit - InfinityQR URL website"
+   ```
+3. Add remote and push:
+   ```bash
+   git remote add origin https://github.com/yourusername/infintyqrurl.git
+   git branch -M main
+   git push -u origin main
+   ```
 
-### Step 3: Upload Files
-**Method A: File Manager**
-1. Go to "File Manager" in control panel
-2. Navigate to `public_html` directory
-3. Upload all files and folders from your project
-4. Maintain the exact folder structure
+### Step 3: Enable GitHub Pages
+1. In your GitHub repository, go to **Settings**
+2. Scroll down to **Pages** section
+3. Under "Build and deployment", set **Source** to **Deploy from a branch**
+4. Set **Branch** to **main** and **Folder** to **/(root)**
+5. Click **Save**
 
-**Method B: FTP**
-1. Set up FTP account in InfinityFree control panel
-2. Use FTP client (FileZilla, Cyberduck)
-3. Connect to FTP server
-4. Upload all files to `public_html` directory
+### Step 4: Wait for Deployment
+1. GitHub Pages will take 1-2 minutes to deploy
+2. You'll see a green checkmark when ready
+3. Your site will be available at: `https://yourusername.github.io/infintyqrurl/`
 
-### Step 4: Configure Custom Domain
-1. In InfinityFree control panel, go to "Domains"
-2. Click "Add Custom Domain"
-3. Enter: `infinityqrurl.com`
-4. Follow DNS configuration instructions:
-   - Point A record to InfinityFree IP
-   - Set CNAME for www if needed
-
-### Step 5: Configure SSL
-1. Go to "SSL Certificates" in control panel
-2. Enable free Let's Encrypt SSL
-3. Wait for certificate generation (usually 1-2 hours)
-4. Force HTTPS redirect
-
-### Step 6: Test Website
-1. Visit `https://infinityqrurl.com`
+### Step 5: Test GitHub Pages Site
+1. Visit your GitHub Pages URL
 2. Test all functionality:
    - URL shortening
    - QR code generation
    - Responsive design
-   - Ad placements (empty placeholders)
+   - Navigation and forms
 
-## 🌐 Option 2: Netlify Deployment (Backup)
+## 🌐 Option 2: Netlify Deployment (Alternative)
 
 ### Step 1: Connect GitHub Repository
 1. Go to [Netlify](https://netlify.com/)
