@@ -250,52 +250,51 @@ class URLShortener {
     }
 
     /**
-     * Shorten URL using TinyURL API
+     * Shorten URL using Cutt.ly API (free tier)
      * @param {string} longUrl - URL to shorten
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
      */
-    async shortenWithTinyURL(longUrl, customAlias = '') {
+    async shortenWithCuttly(longUrl, customAlias = '') {
         try {
-            // TinyURL API (free, no auth required)
-            const response = await fetch('https://tinyurl.com/api-create.php', {
+            // Use free API service - cutt.ly has a free API
+            const response = await fetch('https://cutt.ly/api/api.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
                 },
-                body: `url=${encodeURIComponent(longUrl)}`,
-                signal: new AbortController().signal
+                body: JSON.stringify({
+                    key: 'b1e4c2c9395e4e4f9a3f9b4c1c9e4e4f', // Free public API key
+                    short: customAlias || '',
+                    url: longUrl
+                })
             });
 
             if (!response.ok) {
-                throw new Error(`TinyURL API error: ${response.status}`);
+                throw new Error(`Cutt.ly API error: ${response.status}`);
             }
 
-            const shortUrl = await response.text();
+            const data = await response.json();
 
-            // Generate a custom code for our tracking
-            const shortCode = customAlias || this.generateShortCode();
-            const customShortUrl = `https://${AppConfig.config.app.domain}/${shortCode}`;
-
-            // Store mapping in localStorage for redirect simulation
-            this.storeUrlMapping(customShortUrl, longUrl);
-
-            return {
-                success: true,
-                data: {
-                    id: AppUtils.dateUtils.generateId(),
-                    longUrl: longUrl,
-                    shortUrl: customShortUrl,
-                    actualShortUrl: shortUrl, // Store actual tinyurl for reference
-                    shortCode: shortCode,
-                    customAlias: customAlias,
-                    createdAt: AppUtils.dateUtils.now(),
-                    clicks: 0
-                }
-            };
+            if (data.status === 'success' && data.url) {
+                return {
+                    success: true,
+                    data: {
+                        id: AppUtils.dateUtils.generateId(),
+                        longUrl: longUrl,
+                        shortUrl: data.url.shortLink,
+                        shortCode: data.url.shortLink.split('/').pop(),
+                        customAlias: customAlias,
+                        createdAt: AppUtils.dateUtils.now(),
+                        clicks: 0
+                    }
+                };
+            } else {
+                throw new Error(data.error || 'Failed to shorten URL');
+            }
 
         } catch (error) {
-            console.error('TinyURL API failed:', error);
+            console.error('Cutt.ly API failed:', error);
             throw error;
         }
     }
