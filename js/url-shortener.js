@@ -258,7 +258,71 @@ class URLShortener {
     }
 
     /**
-     * Primary TinyURL shortening (free, no auth required)
+     * Primary Rebrandly API shortening (professional service with API key)
+     * @param {string} longUrl - URL to shorten
+     * @param {string} customAlias - Optional custom alias
+     * @param {Object} controller - AbortController for timeout
+     * @returns {Promise<Object>} - API response
+     */
+    async shortenWithRebrandly(longUrl, customAlias = '', controller = null) {
+        try {
+            const requestBody = {
+                destination: longUrl,
+                domain: { fullName: "rebrand.ly" }
+            };
+
+            // Add custom alias if provided
+            if (customAlias) {
+                requestBody.slashtag = customAlias;
+            }
+
+            const response = await fetch('https://api.rebrandly.com/v1/links', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': this.apiKey,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(requestBody),
+                signal: controller?.signal
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error('Rebrandly API key is invalid');
+                } else if (response.status === 409) {
+                    throw new Error('Custom alias already taken');
+                }
+                throw new Error(`Rebrandly API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data && data.shortUrl) {
+                return {
+                    success: true,
+                    data: {
+                        id: data.id,
+                        longUrl: longUrl,
+                        shortUrl: data.shortUrl,
+                        shortCode: data.slashtag,
+                        customAlias: customAlias,
+                        createdAt: data.createdAt || AppUtils.dateUtils.now(),
+                        clicks: data.clicks || 0
+                    }
+                };
+            } else {
+                throw new Error('Invalid response from Rebrandly API');
+            }
+
+        } catch (error) {
+            console.error('Rebrandly API failed:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Fallback TinyURL shortening (free, no auth required)
      * @param {string} longUrl - URL to shorten
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
