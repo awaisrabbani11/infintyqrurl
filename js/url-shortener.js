@@ -258,12 +258,12 @@ class URLShortener {
     }
 
     /**
-     * Fallback TinyURL shortening (free, no auth required)
+     * Primary TinyURL shortening (free, no auth required)
      * @param {string} longUrl - URL to shorten
      * @param {string} customAlias - Optional custom alias
      * @returns {Promise<Object>} - API response
      */
-    async shortenWithTinyURLFallback(longUrl, customAlias = '') {
+    async shortenWithTinyURL(longUrl, customAlias = '') {
         try {
             // TinyURL API (free, no auth required)
             const response = await fetch('https://tinyurl.com/api-create.php', {
