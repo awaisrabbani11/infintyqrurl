@@ -229,8 +229,8 @@ class URLShortener {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
         try {
-            // Try using TinyURL API first (most reliable, free, no auth required)
-            const result = await this.shortenWithTinyURL(longUrl, customAlias, controller);
+            // Try using Rebrandly API first (professional service with your API key)
+            const result = await this.shortenWithRebrandly(longUrl, customAlias, controller);
 
             clearTimeout(timeoutId);
             return result;
