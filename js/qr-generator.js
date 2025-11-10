@@ -223,11 +223,8 @@ class QRCodeGenerator {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
         try {
-            // For demo purposes, we'll use a QR code generation library
-            // In production, replace this with actual API call
-
-            // Check if QRServer API is available (free, no auth required)
-            const qrData = await this.generateWithQRServer(url, options);
+            // First try with qrcode.co.uk API
+            const qrData = await this.generateWithQRCodeUK(url, options);
 
             clearTimeout(timeoutId);
 
@@ -244,40 +241,91 @@ class QRCodeGenerator {
                 }
             };
 
-            /* Actual API implementation would look like this:
-            const response = await fetch(`${this.baseUrl}/qr`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${this.apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: url,
-                    size: `${options.size}x${options.size}`,
-                    format: options.format,
-                    error_correction: options.errorCorrection,
-                    margin: options.margin
-                }),
-                signal: controller.signal
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return { success: true, data };
-            */
-
         } catch (error) {
             clearTimeout(timeoutId);
 
-            if (error.name === 'AbortError') {
-                throw new Error(AppConfig.errorMessages.timeout);
+            // If qrcode.co.uk fails, fallback to QRServer API
+            try {
+                console.log('Fallback to QRServer API');
+                const fallbackData = await this.generateWithQRServer(url, options);
+
+                return {
+                    success: true,
+                    data: {
+                        id: AppUtils.dateUtils.generateId(),
+                        url: url,
+                        imageUrl: fallbackData.imageUrl,
+                        size: options.size,
+                        format: options.format,
+                        createdAt: AppUtils.dateUtils.now(),
+                        downloads: 0
+                    }
+                };
+            } catch (fallbackError) {
+                console.error('All QR code generation methods failed:', fallbackError);
+                throw new Error(AppConfig.errorMessages.qrGenerationFailed);
+            }
+        }
+    }
+
+    /**
+     * Generate QR code using qrcode.co.uk API
+     * @param {string} url - URL to encode
+     * @param {Object} options - QR code options
+     * @returns {Promise<Object>} - QR code data
+     */
+    async generateWithQRCodeUK(url, options) {
+        try {
+            // Try different endpoint variations
+            const endpoints = [
+                '/api/v1/qrcode',
+                '/api/qrcode',
+                '/api/create',
+                '/api/generate'
+            ];
+
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${this.apiKey}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            data: url,
+                            size: options.size,
+                            format: options.format,
+                            error_correction: 'M',
+                            margin: 4
+                        }),
+                        signal: controller.signal
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        // Handle different response formats
+                        if (data.qr_code_url || data.qrCodeUrl || data.url) {
+                            return { imageUrl: data.qr_code_url || data.qrCodeUrl || data.url };
+                        } else if (data.image || data.imageUrl) {
+                            return { imageUrl: data.image || data.imageUrl };
+                        } else {
+                            console.log('Unknown response format:', data);
+                            throw new Error('Unknown API response format');
+                        }
+                    }
+                } catch (err) {
+                    console.log(`Endpoint ${endpoint} failed:`, err.message);
+                    continue;
+                }
             }
 
+            throw new Error('All qrcode.co.uk API endpoints failed');
+
+        } catch (error) {
+            console.error('qrcode.co.uk API failed:', error);
             throw error;
         }
     }
