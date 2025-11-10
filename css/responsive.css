@@ -17,27 +17,7 @@
     /* Show sidebar ads on large desktop */
     .ad-sidebar-1,
     .ad-sidebar-2 {
-        display: block;
-        position: fixed;
-        right: 20px;
-        width: 728px;
-        z-index: 100;
-    }
-
-    .ad-sidebar-1 {
-        top: 200px;
-    }
-
-    .ad-sidebar-2 {
-        top: 300px;
-    }
-
-    .main-content {
-        margin-right: 768px; /* Make space for sidebar ads */
-    }
-
-    .container {
-        max-width: 1000px; /* Reduce width to accommodate sidebar */
+        display: block !important;
     }
 }
 
