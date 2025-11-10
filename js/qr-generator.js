@@ -289,28 +289,43 @@ class QRCodeGenerator {
      * @returns {Promise<Object>} - QR code data
      */
     async generateWithQRServer(url, options) {
-        // Using qr-server.com API (free, no authentication required)
-        const params = new URLSearchParams({
-            size: `${options.size}x${options.size}`,
-            data: url,
-            format: options.format,
-            margin: options.margin,
-            qzone: 1,
-            color: options.color.dark.replace('#', ''),
-            bgcolor: options.color.light.replace('#', '')
-        });
+        try {
+            // Using qr-server.com API (free, no authentication required)
+            const params = new URLSearchParams({
+                size: `${options.size}x${options.size}`,
+                data: url,
+                format: options.format,
+                margin: options.margin,
+                qzone: 1,
+                color: options.color.dark.replace('#', ''),
+                bgcolor: options.color.light.replace('#', '')
+            });
 
-        const imageUrl = `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
+            const imageUrl = `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
 
-        // Test if the image loads successfully
-        const testImg = new Image();
-        await new Promise((resolve, reject) => {
-            testImg.onload = resolve;
-            testImg.onerror = reject;
-            testImg.src = imageUrl;
-        });
+            // Test if the image loads successfully
+            const testImg = new Image();
+            await new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    reject(new Error('QR code generation timeout'));
+                }, 5000);
 
-        return { imageUrl };
+                testImg.onload = () => {
+                    clearTimeout(timeout);
+                    resolve();
+                };
+                testImg.onerror = () => {
+                    clearTimeout(timeout);
+                    reject(new Error('Failed to load QR code image'));
+                };
+                testImg.src = imageUrl;
+            });
+
+            return { imageUrl };
+        } catch (error) {
+            console.error('QRServer API failed:', error);
+            throw error;
+        }
     }
 
     /**
