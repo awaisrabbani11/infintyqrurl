@@ -1,6 +1,6 @@
 # Deployment Guide for InfinityQR URL
 
-This guide provides step-by-step instructions for deploying the InfinityQR URL website to both InfinityFree and Netlify hosting platforms.
+This guide provides step-by-step instructions for deploying the InfinityQR URL website to GitHub Pages and Netlify hosting platforms.
 
 ## 🚀 Pre-Deployment Checklist
 
@@ -8,8 +8,8 @@ Before deploying, ensure you have:
 
 - [ ] All project files ready
 - [ ] API keys configured
-- [ ] Domain name pointing to hosting provider
-- [ ] SSL certificate (usually automatic)
+- [ ] Domain name ready for manual DNS configuration
+- [ ] GitHub repository created and code pushed
 - [ ] Tested all functionality locally
 
 ## 📋 File Structure for Deployment
