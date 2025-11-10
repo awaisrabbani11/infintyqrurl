@@ -79,8 +79,8 @@ const getApiConfig = () => {
         };
     } else if (environment.isProduction) {
         // In production, API keys should come from environment variables
-        return {
-            ...config,
+        // Netlify supports environment variables, GitHub Pages uses different approach
+        const netlifyConfig = environment.isNetlify ? {
             urlShortener: {
                 ...config.urlShortener,
                 apiKey: window.ENV?.URL_SHORTENER_API_KEY || config.urlShortener.apiKey
@@ -89,6 +89,21 @@ const getApiConfig = () => {
                 ...config.qrCode,
                 apiKey: window.ENV?.QR_CODE_API_KEY || config.qrCode.apiKey
             }
+        } : {
+            // GitHub Pages - use client-side config (for demo purposes)
+            urlShortener: {
+                ...config.urlShortener,
+                apiKey: config.urlShortener.apiKey
+            },
+            qrCode: {
+                ...config.qrCode,
+                apiKey: config.qrCode.apiKey
+            }
+        };
+
+        return {
+            ...config,
+            ...netlifyConfig
         };
     }
     return config;
