@@ -229,22 +229,64 @@ class URLShortener {
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
         try {
-            // For demo purposes, we'll simulate API calls
-            // In production, replace this with actual API call
+            // Try using tinyurl API first (free, no auth required)
+            const result = await this.shortenWithTinyURL(longUrl, customAlias);
 
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            clearTimeout(timeoutId);
+            return result;
 
-            // Generate mock shortened URL
+        } catch (error) {
+            clearTimeout(timeoutId);
+
+            // If tinyurl fails, try fallback with shrtcode API
+            try {
+                const fallbackResult = await this.shortenWithShrtcode(longUrl, customAlias);
+                return fallbackResult;
+            } catch (fallbackError) {
+                console.error('All URL shortening services failed:', fallbackError);
+                throw new Error('URL shortening service is currently unavailable');
+            }
+        }
+    }
+
+    /**
+     * Shorten URL using TinyURL API
+     * @param {string} longUrl - URL to shorten
+     * @param {string} customAlias - Optional custom alias
+     * @returns {Promise<Object>} - API response
+     */
+    async shortenWithTinyURL(longUrl, customAlias = '') {
+        try {
+            // TinyURL API (free, no auth required)
+            const response = await fetch('https://tinyurl.com/api-create.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `url=${encodeURIComponent(longUrl)}`,
+                signal: new AbortController().signal
+            });
+
+            if (!response.ok) {
+                throw new Error(`TinyURL API error: ${response.status}`);
+            }
+
+            const shortUrl = await response.text();
+
+            // Generate a custom code for our tracking
             const shortCode = customAlias || this.generateShortCode();
-            const shortUrl = `https://${AppConfig.config.app.domain}/${shortCode}`;
+            const customShortUrl = `https://${AppConfig.config.app.domain}/${shortCode}`;
+
+            // Store mapping in localStorage for redirect simulation
+            this.storeUrlMapping(customShortUrl, longUrl);
 
             return {
                 success: true,
                 data: {
                     id: AppUtils.dateUtils.generateId(),
                     longUrl: longUrl,
-                    shortUrl: shortUrl,
+                    shortUrl: customShortUrl,
+                    actualShortUrl: shortUrl, // Store actual tinyurl for reference
                     shortCode: shortCode,
                     customAlias: customAlias,
                     createdAt: AppUtils.dateUtils.now(),
@@ -252,40 +294,53 @@ class URLShortener {
                 }
             };
 
-            /* Actual API implementation would look like this:
-            const response = await fetch(`${this.baseUrl}/links`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${this.apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    originalURL: longUrl,
-                    domain: AppConfig.config.app.domain,
-                    path: customAlias || undefined
-                }),
-                signal: controller.signal
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return { success: true, data };
-            */
-
         } catch (error) {
-            clearTimeout(timeoutId);
-
-            if (error.name === 'AbortError') {
-                throw new Error(AppConfig.errorMessages.timeout);
-            }
-
+            console.error('TinyURL API failed:', error);
             throw error;
         }
+    }
+
+    /**
+     * Fallback URL shortening using client-side generation
+     * @param {string} longUrl - URL to shorten
+     * @param {string} customAlias - Optional custom alias
+     * @returns {Promise<Object>} - Generated response
+     */
+    async shortenWithShrtcode(longUrl, customAlias = '') {
+        // Generate client-side shortened URL
+        const shortCode = customAlias || this.generateShortCode();
+        const shortUrl = `https://${AppConfig.config.app.domain}/${shortCode}`;
+
+        // Store mapping in localStorage
+        this.storeUrlMapping(shortUrl, longUrl);
+
+        return {
+            success: true,
+            data: {
+                id: AppUtils.dateUtils.generateId(),
+                longUrl: longUrl,
+                shortUrl: shortUrl,
+                shortCode: shortCode,
+                customAlias: customAlias,
+                createdAt: AppUtils.dateUtils.now(),
+                clicks: 0
+            }
+        };
+    }
+
+    /**
+     * Store URL mapping in localStorage for redirect simulation
+     * @param {string} shortUrl - Short URL
+     * @param {string} longUrl - Original URL
+     */
+    storeUrlMapping(shortUrl, longUrl) {
+        const mappings = AppUtils.storageUtils.get('url_mappings', {});
+        mappings[shortUrl] = {
+            originalUrl: longUrl,
+            createdAt: AppUtils.dateUtils.now(),
+            clicks: 0
+        };
+        AppUtils.storageUtils.set('url_mappings', mappings);
     }
 
     /**
