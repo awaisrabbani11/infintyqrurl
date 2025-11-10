@@ -1,0 +1,126 @@
+# robots.txt for InfinityQR URL
+# https://www.infinityqrurl.com/
+
+User-agent: *
+Allow: /
+
+# Allow all important crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# Major search engines
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+Crawl-delay: 2
+
+# Development and testing crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Disallow private/admin areas (even though they don't exist yet)
+Disallow: /admin/
+Disallow: /api/admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /.DS_Store
+Disallow: /Thumbs.db
+
+# Disallow certain file types
+Disallow: /*.log$
+Disallow: /*.tmp$
+Disallow: /*.bak$
+Disallow: /*.cache$
+Disallow: /*.config$
+
+# Allow important resources
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+Allow: /images/
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+Allow: *.ico
+
+# Sitemap location
+Sitemap: https://www.infinityqrurl.com/sitemap.xml
+Sitemap: https://infinityqrurl.com/sitemap.xml
+
+# Additional sitemaps (if they exist in future)
+# Sitemap: https://www.infinityqrurl.com/sitemap-images.xml
+# Sitemap: https://www.infinityqrurl.com/sitemap-videos.xml
+
+# Host directive for Yandex
+Host: https://www.infinityqrurl.com
+
+# SEO optimization comments
+# This file was last updated: 2024-11-10
+# Website: InfinityQR URL - Free URL Shortener & QR Code Generator
+# Purpose: Search engine crawling instructions
