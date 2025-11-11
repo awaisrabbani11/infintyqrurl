@@ -277,9 +277,13 @@
         }
 
         // Check if user is already logged in
-        window.addEventListener('DOMContentLoaded', () => {
-            if (dataManager.isLoggedIn()) {
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Wait for data manager to be ready
+            await waitForDataManager();
+
+            if (window.dataManager.isLoggedIn()) {
                 window.location.href = 'index.html?showDashboard=true';
+                return;
             }
         });
     </script>
