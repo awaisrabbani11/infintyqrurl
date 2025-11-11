@@ -289,9 +289,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dataManager = new DataManager();
     console.log('✅ Data manager loaded and ready');
 });
-
-// Global functions for onclick handlers
-window.showLogin = () => window.dataManager?.showLoginModal();
-window.showSignup = () => window.dataManager?.showSignupModal();
-window.showDashboard = () => window.dataManager?.showDashboard();
-window.logoutUser = () => window.dataManager?.logout();
