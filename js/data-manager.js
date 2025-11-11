@@ -7,7 +7,6 @@ class DataManager {
     constructor() {
         this.dataFolder = 'data';
         this.initializeDataStructure();
-        this.bindDirectButtonEvents();
         console.log('✅ Data manager initialized');
     }
 
