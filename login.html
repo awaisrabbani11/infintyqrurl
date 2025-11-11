@@ -199,6 +199,23 @@
 
     <script src="js/data-manager.js"></script>
     <script>
+        // Ensure data manager is initialized
+        let dataManagerReady = false;
+
+        function waitForDataManager() {
+            return new Promise((resolve) => {
+                const checkManager = () => {
+                    if (window.dataManager) {
+                        dataManagerReady = true;
+                        resolve(window.dataManager);
+                    } else {
+                        setTimeout(checkManager, 100);
+                    }
+                };
+                checkManager();
+            });
+        }
+
         async function handleLogin(event) {
             event.preventDefault();
 
@@ -219,8 +236,18 @@
             btnLoader.style.display = 'inline';
 
             try {
+                // Wait for data manager to be ready
+                if (!dataManagerReady) {
+                    messageContainer.innerHTML = `
+                        <div class="success-message">
+                            🔧 Initializing authentication system...
+                        </div>
+                    `;
+                    const dataManager = await waitForDataManager();
+                }
+
                 // Authenticate user using data manager
-                const user = await dataManager.authenticateUser(email, password);
+                const user = await window.dataManager.authenticateUser(email, password);
 
                 // Store user session
                 localStorage.setItem('currentUserId', user.id);
