@@ -134,10 +134,10 @@ class AuthRedirect {
                     </div>
 
                     <!-- Adstara Banner 1 -->
-                    <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #333;">
-                        <p style="color: #00ff88; margin: 0;">Adstara Banner 728x90 - Dashboard Top</p>
-                        <small style="color: #ccc;">Position: Top of Dashboard</small>
-                    </div>
+                   <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #333;">
+    <p style="color: #00ff88; margin: 0 0 10px 0;">Adsterra Social Bar - Dashboard Top</p>
+    <script type='text/javascript' src='//pl28028122.effectivegatecpm.com/9f/4e/87/9f4e8787c960f34dfd353473b0fa845d.js'></script>
+</div>
 
                     <!-- User Stats -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
@@ -160,10 +160,22 @@ class AuthRedirect {
                     </div>
 
                     <!-- Adstara Banner 2 -->
-                    <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #333;">
-                        <p style="color: #00ff88; margin: 0;">Adstara Banner 728x90 - Dashboard Middle</p>
-                        <small style="color: #ccc;">Position: Between Stats and Recent Links</small>
-                    </div>
+                   <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #333;">
+    <p style="color: #00ff88; margin: 0 0 15px 0;">Adsterra Banner 320x50 - Dashboard Middle</p>
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '383c4f9dcfdc97900ed7e9d5ef0733f0',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/383c4f9dcfdc97900ed7e9d5ef0733f0/invoke.js"></script>
+    <div style="margin-top: 15px;">
+        <small style="color: #ccc;">Position: Between Stats and Recent Links</small>
+    </div>
+</div>
 
                     <h3 style="color: #fff;">🔗 Recent Links</h3>
                     <div id="recentLinks" style="margin-bottom: 30px;">
@@ -176,12 +188,14 @@ class AuthRedirect {
                     </div>
 
                     <!-- Adstara Banner 3 -->
-                    <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: center; border: 1px solid #333;">
-                        <p style="color: #00ff88; margin: 0;">Adstara Banner 728x90 - Dashboard Bottom</p>
-                        <small style="color: #ccc;">Position: Bottom of Dashboard</small>
-                    </div>
-                </div>
-            </div>
+                   <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: center; border: 1px solid #333;">
+    <p style="color: #00ff88; margin: 0 0 15px 0;">Adsterra Native Bar - Dashboard Bottom</p>
+    <script async="async" data-cfasync="false" src="//pl28028136.effectivegatecpm.com/15c8ccf957c11aebcf994e8696d740bc/invoke.js"></script>
+    <div id="container-15c8ccf957c11aebcf994e8696d740bc"></div>
+    <div style="margin-top: 15px;">
+        <small style="color: #ccc;">Position: Bottom of Dashboard</small>
+    </div>
+</div>
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
