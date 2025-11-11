@@ -68,7 +68,6 @@ class AuthRedirect {
                 if (this.isLoggedIn()) {
                     this.showDashboard();
                 } else {
-                    alert('Please login to access your dashboard');
                     window.location.href = 'login.html';
                 }
             });
