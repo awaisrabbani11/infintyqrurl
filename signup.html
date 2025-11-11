@@ -187,23 +187,6 @@
 
     <script src="js/data-manager.js"></script>
     <script>
-        // Ensure data manager is initialized
-        let dataManagerReady = false;
-
-        function waitForDataManager() {
-            return new Promise((resolve) => {
-                const checkManager = () => {
-                    if (window.dataManager) {
-                        dataManagerReady = true;
-                        resolve(window.dataManager);
-                    } else {
-                        setTimeout(checkManager, 100);
-                    }
-                };
-                checkManager();
-            });
-        }
-
         async function handleSignup(event) {
             event.preventDefault();
 
@@ -231,15 +214,8 @@
             btnLoader.style.display = 'inline';
 
             try {
-                // Wait for data manager to be ready
-                if (!dataManagerReady) {
-                    messageContainer.innerHTML = `
-                        <div class="success-message">
-                            🔧 Initializing authentication system...
-                        </div>
-                    `;
-                    const dataManager = await waitForDataManager();
-                }
+                // Wait a moment for data manager to be ready
+                await new Promise(resolve => setTimeout(resolve, 500));
 
                 // Create user using data manager
                 const userData = { name, email, password };
