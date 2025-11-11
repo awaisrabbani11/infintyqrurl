@@ -82,6 +82,9 @@ class AuthRedirect {
         if (urlParams.get('showDashboard') === 'true') {
             if (this.isLoggedIn()) {
                 setTimeout(() => this.showDashboard(), 500);
+            } else {
+                // User not logged in, redirect to login
+                window.location.href = 'login.html';
             }
         }
     }
