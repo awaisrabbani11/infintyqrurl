@@ -92,13 +92,8 @@ class AuthRedirect {
     }
 
     showDashboard() {
-        // Show dashboard modal
-        if (window.authSystem) {
-            window.authSystem.showDashboard();
-        } else {
-            // Fallback: create simple dashboard
-            this.createSimpleDashboard();
-        }
+        // Directly create simple dashboard (authSystem was removed)
+        this.createSimpleDashboard();
     }
 
     createSimpleDashboard() {
